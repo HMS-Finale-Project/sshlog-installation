@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+GROUP=sshlog
+getent group $GROUP >/dev/null || addgroup $GROUP >/dev/null

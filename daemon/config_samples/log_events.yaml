@@ -1,0 +1,20 @@
+# Description:
+# Logs all events (e.g., login, command start, file upload) to a single file
+
+events:
+  - event: log_general_activity
+    triggers:
+      - connection_established
+      - connection_auth_failed
+      - connection_close
+      - command_start
+      - command_finish
+      - file_upload
+    filters:
+      ignore_existing_logins: True
+    actions:
+      - action: log_events
+        plugin: eventlogfile_action
+        log_file_path: /var/log/sshlog/event.log
+        max_size_mb: 10
+        number_of_log_files: 5

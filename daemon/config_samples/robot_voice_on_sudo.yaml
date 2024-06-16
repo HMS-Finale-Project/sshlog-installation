@@ -1,0 +1,15 @@
+# Description:
+# Activates "espeak" to say words when a user has executed sudo
+
+events:
+  - event: sudo_successful
+    triggers: [ 'command_finish']
+    filters:
+      command_name: 'sudo'
+      command_exit_code: '= 0'
+      require_tty: True
+    actions:
+      - action: speak_sudo_warning
+        plugin: run_command_action
+        command: espeak
+        args: ["User {{username}} has executed sudo to root"]
